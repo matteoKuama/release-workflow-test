@@ -1,0 +1,30 @@
+name: Release branch name test
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  branch-name:
+    name: Get branch names.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get branch names with tj-actions.
+        id: branch-names
+        uses: tj-actions/branch-names@v8
+  conditional-exit:
+    name: Conditionally print stuff
+    runs-on: ubuntu-latest
+    steps:
+      - id: branch-names
+        uses: tj-actions/branch-names@v8
+      - name: Check release branch
+        run: |
+          echo conditionally 
+          if ${{steps.branch-names.outputs.current_branch != 'master'}} then exit 0
+      - name: Some stuff
+        run: |
+          echo some stuff
+      - name: Some other stuff
+        run: |
+          echo some other stuff
