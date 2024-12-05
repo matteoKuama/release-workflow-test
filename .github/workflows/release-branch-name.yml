@@ -1,8 +1,8 @@
 name: Release branch name test only on tags
 on:
-  release:
-    types:
-      - created
+  push:
+    tags:
+      - "*"
 
 jobs:
   conditional-exit:
@@ -27,6 +27,8 @@ jobs:
           echo outputs.default_branch ${{steps.branch-names.outputs.default_branch}}
           echo outputs.head_ref_branch ${{steps.branch-names.outputs.head_ref_branch}}
           echo outputs.ref_branch ${{steps.branch-names.outputs.ref_branch}}
+          echo outputs.ref_branch ${{steps.branch-names.outputs.tag}}
+          echo outputs.ref_branch ${{steps.branch-names.outputs.is_tag}}
       - name: Some stuff
         run: |
           echo some stuff
