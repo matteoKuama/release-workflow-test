@@ -1,0 +1,35 @@
+name: Release branch name test only on tags
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  conditional-exit:
+    name: Conditionally print stuff
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get branch names
+        id: branch-names
+        uses: tj-actions/branch-names@v8
+
+      - name: Current branch names
+        run: |
+          echo "${{ steps.branch-names.outputs.current_branch }}"
+      - name: Print branch-names
+        run: |
+          echo branch names 
+          echo outputs: ${{steps.branch-names.outputs}}
+          echo outcome: ${{steps.branch-names.outcome}}
+          echo conclusion: ${{steps.branch-names.conclusion}}
+          echo outputs.base_ref_branch: ${{steps.branch-names.outputs.base_ref_branch}}
+          echo outputs.current_branch ${{steps.branch-names.outputs.current_branch}}
+          echo outputs.default_branch ${{steps.branch-names.outputs.default_branch}}
+          echo outputs.head_ref_branch ${{steps.branch-names.outputs.head_ref_branch}}
+          echo outputs.ref_branch ${{steps.branch-names.outputs.ref_branch}}
+      - name: Some stuff
+        run: |
+          echo some stuff
+      - name: Some other stuff
+        run: |
+          echo some other stuff
