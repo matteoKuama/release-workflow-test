@@ -1,0 +1,33 @@
+name: Release branch name test
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  conditional-exit:
+    name: Conditionally print stuff
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get branch names
+        id: branch-names
+        uses: tj-actions/branch-names@v8
+
+      - name: Current branch names
+        run: |
+          echo "${{ steps.branch-names.outputs.current_branch }}"
+      - name: Check release branch
+        run: |
+          echo conditionally 
+          echo ${{steps.branch-names.outputs.base_ref_branch}}
+          echo ${{steps.branch-names.outputs.current_branch}}
+          echo ${{steps.branch-names.outputs.default_branch}}
+          echo ${{steps.branch-names.outputs.head_ref_branch}}
+          echo ${{steps.branch-names.outputs.ref_branch}}
+
+      - name: Some stuff
+        run: |
+          echo some stuff
+      - name: Some other stuff
+        run: |
+          echo some other stuff
