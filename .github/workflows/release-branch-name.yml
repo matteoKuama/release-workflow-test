@@ -1,8 +1,8 @@
 name: Release branch name test only on tags
 on:
-  push:
-    tags:
-      - "*"
+  release:
+    types:
+      - created
 
 jobs:
   conditional-exit:
